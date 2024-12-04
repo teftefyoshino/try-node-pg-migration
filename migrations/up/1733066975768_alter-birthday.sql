@@ -1,0 +1,1 @@
+ALTER TABLE myuser ALTER COLUMN birthday TYPE timestamptz USING to_timestamp(birthday, 'YYYYMMDD');
