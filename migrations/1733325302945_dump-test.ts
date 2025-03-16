@@ -10,6 +10,7 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
     console.log(result.rows); // [{id: 1, name: 'a'}]
 
     // use pgm chain method example
+    pgm.dropTable('example_table');
     pgm.createTable('example_table', {
         id: 'id',
         createdAt: { type: 'timestamp', notNull: true, default: pgm.func('CURRENT_TIMESTAMP') },
@@ -18,10 +19,12 @@ export async function up(pgm: MigrationBuilder): Promise<void> {
 
     // get dump
     // required installed postgresql in client exec environment
-    const stdout = execSync('pg_dumpa postgres > ./dump.sql');
-    if(stdout) {
-        console.error(stdout.toString())
-        throw new Error()
+    try {
+        const stdout = execSync('pg_dump postgres > ./dump.sql');
+        console.log(stdout.toString())
+    } catch (error) {
+        console.error('Failed to dump')
+        console.error(error)
     }
 }
 
