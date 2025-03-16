@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "start": "node src/index.ts",
     "migrate": "ts-node node_modules/node-pg-migrate/bin/node-pg-migrate.js"
   },
   "keywords": [],
